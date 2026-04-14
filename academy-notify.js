@@ -4,6 +4,7 @@ const XLSX = require("xlsx");
 const fs = require("fs");
 
 const sql = postgres(process.env.DATABASE_URL);
+console.log("Webhook exists:", !!process.env.SLACK_WEBHOOK_URL);
 
 async function sendSlack(message) {
   await fetch(process.env.SLACK_WEBHOOK_URL, {
