@@ -2,7 +2,6 @@ require("dotenv").config();
 const postgres = require("postgres");
 const XLSX = require("xlsx");
 const fs = require("fs");
-const fetch = require("node-fetch");
 
 const sql = postgres(process.env.DATABASE_URL);
 
