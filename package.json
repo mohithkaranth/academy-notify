@@ -1,0 +1,13 @@
+{
+  "name": "academy-notify",
+  "version": "1.0.0",
+  "main": "academy-notify.js",
+  "scripts": {
+    "start": "node academy-notify.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "postgres": "^3.4.0",
+    "xlsx": "^0.18.5"
+  }
+}
