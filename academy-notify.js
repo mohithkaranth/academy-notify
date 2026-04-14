@@ -2,8 +2,17 @@ require("dotenv").config();
 const postgres = require("postgres");
 const XLSX = require("xlsx");
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 const sql = postgres(process.env.DATABASE_URL);
+
+async function sendSlack(message) {
+  await fetch(process.env.SLACK_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text: message }),
+  });
+}
 
 async function run() {
   try {
@@ -15,6 +24,7 @@ async function run() {
 
     if (rows.length === 0) {
       console.log("No new records");
+      await sendSlack("No new academy applications");
       return;
     }
 
@@ -30,7 +40,8 @@ async function run() {
 
     console.log("Excel created:", filePath);
 
-    // 3. (Later) Upload to Google Drive
+    // 3. Notify Slack
+    await sendSlack(`New applications received: ${rows.length}`);
 
     // 4. Mark as processed
     const ids = rows.map(r => r.id);
