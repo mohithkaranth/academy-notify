@@ -24,7 +24,7 @@ async function run() {
 
     if (rows.length === 0) {
       console.log("No new records");
-      await sendSlack("No new academy applications");
+      
       return;
     }
 
