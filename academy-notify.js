@@ -61,7 +61,17 @@ async function run() {
     console.log("Excel created:", filePath);
 
     // 3. Notify Slack
-    await sendSlack(`New applications received: ${rows.length}`);
+   let message = "";
+
+if (rows.length === 1) {
+  const r = rows[0];
+  message = `New application:\n${r.name} - ${r.instrument}`;
+} else {
+  message = `New applications (${rows.length}):\n\n`;
+  message += rows.map(r => `${r.name} - ${r.instrument}`).join("\n");
+}
+
+await sendSlack(message);
 
     // 3.5 Send to Google Sheets
     const sheetRows = rows.map(r => [
