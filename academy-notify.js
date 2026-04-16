@@ -6,6 +6,7 @@ const { google } = require("googleapis");
 
 const sql = postgres(process.env.DATABASE_URL);
 console.log("Webhook exists:", !!process.env.SLACK_WEBHOOK_URL);
+console.log("JSON exists:", !!process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
 
 // Google Sheets setup
 const auth = new google.auth.GoogleAuth({
